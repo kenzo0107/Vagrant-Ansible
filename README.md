@@ -1,13 +1,49 @@
-Vagrant+Ansible
+# Vagrant+Ansible
 
 ### Prerequisite
 Installed bellow tools
 
 * VirtualBox
-* Vagrant 
+* Vagrant
+
+
+## Usage
+
+#### 1. Add Vagrant Box
+
+```
+$ vagrant box add centos6.5 https://github.com/2creatives/vagrant-centos/releases/download/v6.5.1/centos65-x86_64-20131205.box
+```
+
+#### 2. git clone this repository
+
+```
+$ cd ~
+$ git clone https://github.com/kenzo0107/Vagrant-Ansible
+```
+
+#### 3. VagrantVM Build
+
+```
+$ cd Vagrant-Ansible
+$ vagrant up
+``` 
+
+#### 4. add ssh.config
+
+```
+$ vagrant ssh-config > ssh.config
+```
+
+#### 5. Communications Confirmation
+
+```
+$ ansible default -m ping
+```
+
+---
 
 ## Procedure
-
 
 #### Install Ansible
 ```
@@ -15,7 +51,7 @@ $ sudo pip install ansible
 $ ansible --version
 ```
 
-#### Add vagrant box 
+#### Add vagrant box
 
 ```
 $ mkdir -p ~/Vagrant/centos65-vagrant
@@ -73,7 +109,7 @@ ansible <HostName>:<Port> -m <module> -i <eventry file> -u <loguin username> --p
 ansible 127.0.0.1:2222 -m ping -i hosts -u vagrant --private-key=/Users/kenzo/Vagrant/centos65/.vagrant/machines/default/virtualbox/private_key
 
 127.0.0.1 | success >> {
-    "changed": false, 
+    "changed": false,
     "ping": "pong"
 }
 ```
@@ -93,7 +129,7 @@ echo "default" > hosts
 ANSIBLE_SSH_ARGS=' -F ssh.config' ansible default -m ping -i hosts
 
 default | success >> {
-    "changed": false, 
+    "changed": false,
     "ping": "pong"
 }
 ```
@@ -117,7 +153,7 @@ EOS
 ansible default -m ping
 
 default | success >> {
-    "changed": false, 
+    "changed": false,
     "ping": "pong"
 }
 ```
