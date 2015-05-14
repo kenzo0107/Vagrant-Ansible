@@ -1,0 +1,6 @@
+---
+
+- name: yum install pcre-devel zlib-devel
+  yum: name={{ item }} state=present
+  with_items:
+  - "{{ yum_pacakage }}"

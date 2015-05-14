@@ -1,0 +1,33 @@
+---
+
+# httpd
+- name: wget httpd.tar.gz
+  get_url: url={{ httpd_dl_url }} dest={{ src_dir }}
+
+- name: tar -zxvf httpd.tar.gz -C /usr/src/
+  command: chdir={{ src_dir }} tar -zxvf {{ httpd_name }}.tar.gz -C /usr/src/
+
+- name: ./configure httpd
+  shell: cd /usr/src/{{ httpd_name }};{{ item }}
+  with_items:
+    - ./configure --prefix=/etc/httpd --enable-so --enable-headers --enable-dav --enable-deflate --enable-rewrite=shared --enable-ssl --with-ssl=/usr/local/openssl --with-mpm=worker --with-apr=/usr/local/apr --enable-suexec --with-suexec-caller=apache --with-suexec-docroot=/home --with-suexec-logfile=/var/log/httpd/suexec_log
+    - make
+    - make install
+
+- name: scp templates/httpd.conf id@host:/etc/httpd/conf/
+  template: src=httpd.conf dest=/etc/httpd/conf/httpd.conf
+
+- name: scp templates/httpd.init id@host:/etc/rc.d/init.d/
+  template: src=httpd.init dest=/etc/rc.d/init.d/httpd mode=0755
+
+- name: scp templates/logrotate.init id@host:/etc/logrotate.d/
+  template: src=logrotate.init dest=/etc/logrotate.d/httpd mode=0644
+
+- name: service httpd restart; chkconfig httpd on
+  service: 
+    name: httpd
+    enabled: yes
+    state: running
+
+- name: scp templates/index.html id@host:/var/www/html
+  template: src=index.html dest=/var/www/html/index.html
