@@ -1,6 +1,10 @@
-# Vagrant + Ansible + CentOS6
+# build httpd on CentOS in Vagrant by Ansible.
 
-### Prerequisite
+compile httpd Source to build httpd module.
+
+
+
+## Prerequisite
 Installed bellow tools
 
 * VirtualBox
@@ -34,8 +38,22 @@ $ vagrant up
 $ vagrant ssh-config > ssh.config
 ```
 
-#### 5. Communications Confirmation
+#### 5. ping
 
 ```
 $ ansible default -m ping
 ```
+
+#### 6. Build httpd
+
+```
+$ ansible-playbook apache.yml
+```
+
+#### 7. access URL
+
+<http://192.168.33.10>
+
+display "Working!"
+
+OK !
