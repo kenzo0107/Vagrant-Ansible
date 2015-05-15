@@ -1,0 +1,25 @@
+---
+
+- name: wget php.tar.gz
+  get_url: url={{ php_dl_url }} dest={{ src_dir }}
+
+- name: tar -zxvf httpd.tar.gz -C /usr/src/
+  command: chdir={{ src_dir }} tar -zxvf {{ php_name }}.tar.gz -C /usr/src/
+
+- name: yum install packages
+  yum: name=php state=absent
+
+- name: yum install packages
+  yum: name={{ item }} state=latest
+  with_items:
+    - "{{ yum_package }}"
+
+- name: ./configure php
+  shell: cd /usr/src/{{ php_name }};{{ item }}
+  with_items:
+    - ./configure --enable-mbstring --enable-zend-multibyte --with-mysql --enable-mbregex --with-gd --with-jpeg-dir=/usr/lib --with-png-dir=/usr/lib --with-freetype-dir=/usr/lib --with-zlib-dir --with-libdir=lib64 --enable-soap --with-apxs2=/etc/httpd/bin/apxs
+    - make
+    - make install
+
+- name: cp /usr/src/.../cli/php /usr/local/bin/php
+  file: src=/usr/src/{{ php_name }}/sapi/cli/php dest=/usr/local/bin/php

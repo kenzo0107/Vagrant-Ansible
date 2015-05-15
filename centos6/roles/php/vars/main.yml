@@ -1,0 +1,18 @@
+---
+
+src_dir: '/usr/local/src'
+
+php_version: '5.3.6'
+php_name: "php-{{ php_version }}"
+php_dl_url: "http://museum.php.net/php5/{{ php_name }}.tar.gz"
+# http://php.net/releases/
+
+yum_package:
+  - libxml2-devel
+  - libjpeg-devel
+  - libpng-devel
+  - freetype-demos
+  - freetype-devel
+  - mysql-devel
+  - postgresql-devel
+  - gd-devel
