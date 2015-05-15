@@ -1,0 +1,4 @@
+---
+
+- name: useradd -d /var/www/ -s /sbin/nologin -u 48 apache
+  command: useradd -d /var/www/ -s /sbin/nologin -u 48 apache

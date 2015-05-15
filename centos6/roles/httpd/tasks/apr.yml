@@ -1,0 +1,31 @@
+---
+
+# APR
+- name: remove apr-* package
+  yum: name=apr-* state=absent
+
+- name: wget APR.tar.gz
+  get_url: url={{ apr_dl_url }} dest={{ src_dir }}
+
+- name: wget APR-Util.tar.gz
+  get_url: url={{ apr_util_dl_url }} dest={{ src_dir }}
+
+- name: tar -zxvf APR.tar.gz -C /usr/src/
+  command: chdir={{ src_dir }} tar -zxvf {{ apr_name }}.tar.gz -C /usr/src/
+
+- name: tar -zxvf APR-util.tar.gz -C /usr/src/
+  command: chdir={{ src_dir }} tar -zxvf {{ apr_util_name }}.tar.gz -C /usr/src/
+
+- name: ./configure APR
+  shell: cd /usr/src/{{ apr_name }};{{ item }}
+  with_items:
+    - ./configure
+    - make
+    - make install
+
+- name: ./configure APR-util
+  shell: cd /usr/src/{{ apr_util_name }};{{ item }}
+  with_items:
+    - ./configure --with-apr=/usr/local/apr
+    - make
+    - make install

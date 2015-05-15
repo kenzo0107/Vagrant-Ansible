@@ -1,0 +1,29 @@
+---
+
+src_dir: '/usr/local/src'
+
+# openssl
+openssl_version: '1.0.1g'
+openssl_name: "openssl-{{ openssl_version }}"
+openssl_dl_url: "http://www.openssl.org/source/{{ openssl_name }}.tar.gz"
+
+
+# httpd
+httpd_version: '2.4.12'
+httpd_name: "httpd-{{ httpd_version }}"
+httpd_dl_url: "http://ftp.jaist.ac.jp/pub/apache/httpd/{{ httpd_name }}.tar.gz"
+apache_name: "apache-{{ httpd_version }}"
+
+# apr
+apr_version: '1.5.2'
+apr_name: "apr-{{ apr_version }}"
+apr_dl_url: "http://ftp.kddilabs.jp/infosystems/apache//apr/{{ apr_name }}.tar.gz"
+
+# apr_util
+apr_util_version: '1.5.4'
+apr_util_name: "apr-util-{{ apr_util_version }}"
+apr_util_dl_url: "http://ftp.kddilabs.jp/infosystems/apache//apr/{{ apr_util_name }}.tar.gz"
+
+yum_pacakage:
+  - pcre-devel
+  - zlib-devel

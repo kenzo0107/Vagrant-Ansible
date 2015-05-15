@@ -1,0 +1,9 @@
+---
+
+- name: install pip
+  shell: curl -kL https://raw.github.com/pypa/pip/master/contrib/get-pip.py | python
+
+- name: install pip packages
+  pip: name={{ item }} state=latest
+  with_items:
+  - "{{ pip_pacakage }}"

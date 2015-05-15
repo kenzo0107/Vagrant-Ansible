@@ -1,0 +1,8 @@
+---
+
+- include: openssl.yml
+- include: yum.yml
+- include: apr.yml
+- include: publicdir.yml
+- include: useradd.yml
+- include: httpd.yml

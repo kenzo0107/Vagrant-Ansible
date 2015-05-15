@@ -1,0 +1,34 @@
+---
+
+# openssl
+- name: wget the OpenSSL
+  get_url: url={{ openssl_dl_url }} dest={{ src_dir }}
+
+- name: tar zxvf OpenSSL.tar.gz -C /usr/src/
+  command: chdir={{ src_dir }} tar -zxvf {{ openssl_name }}.tar.gz -C /usr/src/
+
+- name: ./config OpenSSL
+  shell: cd /usr/src/{{ openssl_name }};{{ item }}
+  with_items:
+    - ./config --prefix=/usr/local/openssl --openssldir=/usr/local/openssl shared
+    - make
+    - make install
+    - ldconfig
+
+- name: echo '/usr/local/openssl/lib' > /etc/ld.so.conf.d/openssl.conf
+  template: src=openssl.conf dest=/etc/ld.so.conf.d/
+
+- name: load config
+  command: ldconfig
+
+- name: stat /usr/bin/openssl-org
+  stat: path=/usr/bin/openssl-org
+  register: is_openssl_org
+
+- name: mv /usr/bin/openssl /usr/bin/openssl-org
+  command: mv /usr/bin/openssl /usr/bin/openssl-org
+  when: is_openssl_org.stat.isdir is not defined
+
+- name: ln -s /usr/local/openssl/bin/openssl /usr/bin/
+  file: src=/usr/local/openssl/bin/openssl dest=/usr/bin/openssl owner=root group=root mode=0755 state=link
+
