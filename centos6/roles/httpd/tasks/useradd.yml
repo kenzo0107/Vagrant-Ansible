@@ -1,4 +1,10 @@
 ---
 
+- name: add group apache
+  group: name=apache state=present
+
+- name: add user apache
+  user: name=apache state=present
+
 - name: useradd -d /var/www/ -s /sbin/nologin -u 48 apache
-  command: useradd -d /var/www/ -s /sbin/nologin -u 48 apache
+  user: name=48 group=apache home=/var/www/ shell=/sbin/nologin
