@@ -23,11 +23,6 @@
 - name: scp templates/logrotate.init id@host:/etc/logrotate.d/
   template: src=logrotate.init dest=/etc/logrotate.d/httpd mode=0644
 
-- name: service httpd restart; chkconfig httpd on
-  service: 
-    name: httpd
-    enabled: yes
-    state: running
 
-- name: scp templates/index.html id@host:/var/www/html
-  template: src=index.html dest=/var/www/html/index.html
+- name: set localtime to Japan timezone.
+  file: force=yes src=/usr/share/zoneinfo/Japan dest=/etc/localtime state=link 

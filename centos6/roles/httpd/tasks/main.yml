@@ -6,3 +6,4 @@
 - include: publicdir.yml
 - include: useradd.yml
 - include: httpd.yml
+- include: build.yml

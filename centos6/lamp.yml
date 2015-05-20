@@ -6,5 +6,5 @@
   roles:
     - common
     - httpd
-    # - mysql
+    - mysql
     - php

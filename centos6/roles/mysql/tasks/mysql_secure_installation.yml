@@ -1,0 +1,23 @@
+---
+
+# - name: Execute mysql_secure_installation
+#   script: secure_install.sh ""
+#   sudo: yes
+#   ignore_errors: True
+
+# - name: update mysql root passwd
+#   mysql_user: name=root host={{ item }} password={{ mysql_root_password }} priv=*.*:ALL,GRANT
+#   with_items:
+#     - "{{ ansible_enp0s8.ipv4.address }}"
+#     - 127.0.0.1
+#     - ::1
+#     - localhost
+
+- name: copy user my.cnf file with root passwd credentials
+  template: src=my.cnf.j2 dest=/root/.my.cnf owner=root group=root mode=0600
+
+# - name: delete anonymous mysql user
+#   mysql_user: login_user=root login_password="{{ mysql_root_password }}" name='' state=absent
+
+# - name: remove mysql test database
+#   mysql_db: login_user=root login_password="{{ mysql_root_password }}" name=test state=absent

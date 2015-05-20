@@ -1,0 +1,10 @@
+---
+
+- name: service httpd restart; chkconfig httpd on
+  service: 
+    name: httpd
+    enabled: yes
+    state: running
+
+- name: scp templates/index.html id@host:/var/www/html
+  template: src=index.html dest=/var/www/html/index.html

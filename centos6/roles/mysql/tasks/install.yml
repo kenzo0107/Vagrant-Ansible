@@ -1,0 +1,65 @@
+---
+
+- name: install yum 
+  yum: name={{ item }} state=present
+  with_items:
+    - "{{ yum_package }}"
+
+- name: install mysql-python
+  yum: name={{ item }} state=installed
+  with_items:
+    - "{{ pip_package }}"
+
+# # cmake
+# - name: wget cmake.tar.gz
+#   get_url: url={{ cmake_dl_url }} dest={{ src_dir }}
+
+# - name: tar zxvf cmake.tar.gz
+#   command: chdir={{ src_dir }} tar zxvf {{ cmake_name }}.tar.gz -C /usr/src
+
+# - name: ./configure cmake; make && make install
+#   shell: cd /usr/src/{{ cmake_name }};{{ item }}
+#   with_items:
+#     - ./configure
+#     - make
+#     - make install
+
+# mysql
+- name: wget mysql.tar.gz
+  get_url: url={{ mysql_dl_url }} dest={{ src_dir }}
+
+- name: tar zxvf mysql.tar.gz -C /usr/src
+  command: chdir={{ src_dir }} tar zxvf {{ mysql_name }}.tar.gz -C /usr/src 
+
+- name: ./configure php
+  shell: cd /usr/src/{{ mysql_name }};{{ item }}
+  with_items:
+    - cmake . -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci
+    - make
+    - make install
+
+- name: groupadd mysql
+  group: name=mysql state=present
+
+- name: useradd -g mysql -d /usr/local/mysql mysql
+  user: name=mysql group=mysql home=/usr/local/mysql
+
+- name: initialize mysql
+  command: /usr/local/mysql/scripts/mysql_install_db --user=mysql --datadir=/var/lib/mysql --basedir=/usr/local/mysql
+
+- name: chown mysql:mysql -R /var/lib/mysql/
+  command: chown mysql:mysql -R /var/lib/mysql/
+
+- name: cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
+  command: cp /usr/local/mysql/support-files/mysql.server /etc/init.d/mysqld
+
+- name: cp /usr/local/mysql/bin/mysql dest=/usr/bin/mysql
+  command: cp /usr/local/mysql/bin/{{ item }} /usr/bin/{{ item }}
+  with_items:
+    - "{{ mysql_module }}"
+
+- name: copy my.cnf -> /etc/my.cnf
+  action: template src=my.cnf dest=/etc/my.cnf
+
+- name: restart mysqld
+  service: name=mysqld state=restarted enabled=yes

@@ -16,3 +16,8 @@ yum_package:
   - mysql-devel
   - postgresql-devel
   - gd-devel
+  - php-mbstring
+  - php-mysql
+  - php-pear
+  - php-pear-MDB2.noarch
+  - php-pear-MDB2-Driver-mysql.noarch
