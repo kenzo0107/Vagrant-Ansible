@@ -1,4 +1,4 @@
-# build httpd on CentOS in Vagrant by Ansible.
+# build LAMP in Vagrant by Ansible.
 
 compile httpd Source to build httpd module.
 
