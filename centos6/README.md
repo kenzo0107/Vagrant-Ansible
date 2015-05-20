@@ -47,13 +47,23 @@ $ ansible default -m ping
 #### 6. Build httpd
 
 ```
-$ ansible-playbook apache.yml
+$ ansible-playbook lamp.yml
 ```
 
-#### 7. access URL
+#### 7. Apache
 
-<http://192.168.33.10>
+access to <http://192.168.33.10>,
+
+/var/www/html/index.html
 
 display "Working!"
+
+#### 8. php -> MySQL connect confirm.
+
+access to <http://192.168.33.10/dbtest.php>,
+
+display "Connect Success: Localhost via UNIX socket"
+
+
 
 OK !
