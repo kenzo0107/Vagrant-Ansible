@@ -1,6 +1,6 @@
 # build LAMP in Vagrant by Ansible.
 
-compile httpd Source to build httpd module.
+compile httpd, MySQL, PHP Source to build httpd, MySQL, PHP module.
 
 
 
@@ -44,13 +44,13 @@ $ vagrant ssh-config > ssh.config
 $ ansible default -m ping
 ```
 
-#### 6. Build httpd
+#### 6. Build httpd, MySQL, PHP
 
 ```
 $ ansible-playbook lamp.yml
 ```
 
-#### 7. Apache
+#### 7. confirm Apache working.
 
 access to <http://192.168.33.10>,
 
