@@ -1,0 +1,24 @@
+---
+
+- name: wget go.tar.gz
+  get_url: url={{ go_dl_url }} dest={{ src_dir }}
+
+- name: tar -zxvf go.tar.gz -C /usr/local/
+  command: chdir={{ src_dir }} tar -zxvf {{ go_name }}.tar.gz -C /usr/local/
+
+- name: yum remove packages
+  yum: name=go state=absent
+
+# For root user.
+- name: scp bashrc.init /root/.bashrc
+  template: src=bashrc.init dest=/root/.bashrc
+
+# For vagrant user.
+- name: create $HOME/go
+  file: dest=/home/vagrant/go state=directory owner=vagrant group=vagrant
+
+- name: create $HOME/go/bin
+  file: dest=/home/vagrant/go/bin state=directory owner=vagrant group=vagrant
+
+- name: scp bashrc.init $HOME/.bashrc
+  template: src=bashrc.init dest=/home/vagrant/.bashrc

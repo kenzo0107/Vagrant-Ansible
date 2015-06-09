@@ -1,0 +1,7 @@
+---
+
+- name: service nginx; chkconfig nginx on
+  service: 
+    name: nginx
+    enabled: yes
+    state: started

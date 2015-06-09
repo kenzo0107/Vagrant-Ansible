@@ -1,0 +1,15 @@
+---
+
+src_dir: '/usr/local/src'
+
+nginx_version: '1.9.0'
+nginx_dl_url: "http://nginx.org/download/nginx-{{ nginx_version }}.tar.gz"
+nginx_name: "nginx-{{ nginx_version }}"
+
+yum_package:
+  - pcre
+  - pcre-devel 
+  - zlib
+  - zlib-devel
+  - openssl 
+  - openssl-devel

@@ -1,0 +1,4 @@
+---
+
+- include: install.yml
+- include: mysql_secure_installation.yml
