@@ -9,6 +9,7 @@ Installed bellow tools
 
 * VirtualBox
 * Vagrant
+* Ansible
 
 
 ## Usage
@@ -35,16 +36,22 @@ $ vagrant ssh-config > ssh.config
 #### 4. ping
 
 ```
-$ ansible default -m ping
+$ ansible node_go_web -m ping
+
+node_go_web | success >> {
+    "changed": false,
+    "ping": "pong"
+}
 ```
 
-#### 5. Build nginx, MySQL, PHP
+#### 5. Build nginx, MySQL, Go
 
 ```
 $ ansible-playbook lnmg.yml
 ```
 
 #### 6. ssh login vm. go version confirm.
+
 ```
 $ vagrant ssh
 [vagrant ~] go version

@@ -9,6 +9,7 @@ Installed bellow tools
 
 * VirtualBox
 * Vagrant
+* Ansible
 
 
 ## Usage
@@ -36,6 +37,11 @@ $ vagrant ssh-config > ssh.config
 
 ```
 $ ansible default -m ping
+
+default | success >> {
+"changed": false,
+"ping": "pong"
+}
 ```
 
 #### 5. Build httpd, MySQL, PHP
