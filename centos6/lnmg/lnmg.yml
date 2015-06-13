@@ -1,7 +1,8 @@
 - hosts: all
-  user: vagrant
   sudo: yes
   gather_facts: yes
+  vars:
+    - login_user: vagrant
   roles:
     - common
     - nginx

@@ -13,12 +13,12 @@
 - name: scp bashrc.init /root/.bashrc
   template: src=bashrc.init dest=/root/.bashrc
 
-# For vagrant user.
+# For login user (ex: vagrant).
 - name: create $HOME/go
-  file: dest=/home/vagrant/go state=directory owner=vagrant group=vagrant
+  file: dest=/home/{{ login_user }}/go state=directory owner={{ login_user }} group={{ login_user }}
 
 - name: create $HOME/go/bin
-  file: dest=/home/vagrant/go/bin state=directory owner=vagrant group=vagrant
+  file: dest=/home/{{ login_user }}/go/bin state=directory owner={{ login_user }} group={{ login_user }}
 
 - name: scp bashrc.init $HOME/.bashrc
-  template: src=bashrc.init dest=/home/vagrant/.bashrc
+  template: src=bashrc.init dest=/home/{{ login_user }}/.bashrc
