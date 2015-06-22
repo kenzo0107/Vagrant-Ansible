@@ -1,9 +1,11 @@
-- hosts: all
+- hosts: default
   user: vagrant
   sudo: yes
   gather_facts: yes
   roles:
-    - common
-    - httpd
-    - mysql
-    - php
+   - common
+   - httpd
+   - mysql
+   - php
+   - redis
+   - memcache
