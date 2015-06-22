@@ -1,0 +1,28 @@
+---
+
+- name: wget redis.tar.gz
+  get_url: url={{ redis_dl_url }} dest={{ src_dir }}
+
+- name: tar -zxvf redis.tar.gz -C /usr/src/
+  command: chdir={{ src_dir }} tar -zxvf {{ redis_name }}.tar.gz -C /usr/src/
+
+- name: make install redis
+  shell: cd /usr/src/{{ redis_name }};{{ item }}
+  with_items:
+    - make
+    - make install
+
+- name: mkdir /usr/local/redis/
+  file: dest=/usr/local/redis/ state=directory
+
+- name: mkdir /etc/redis
+  file: dest=/etc/redis state=directory
+
+- name: create /etc/redis/redis.conf
+  template: src=redis.conf dest=/etc/redis/
+
+- name: create build script
+  template: src=redis mode=0755 dest=/etc/init.d/
+
+- name: service redis restart. chkconfig redis on.
+  service: name=redis state=restarted enabled=yes

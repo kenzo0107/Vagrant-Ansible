@@ -1,5 +1,9 @@
 ---
 
+- shell: LC_ALL=C
+- shell: export LC_ALL
+- shell: yum update -y
+
 - name: install yum packages
   yum: name={{ item }} state=latest
   with_items:

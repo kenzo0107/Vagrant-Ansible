@@ -17,7 +17,7 @@
 - name: ./configure php
   shell: cd /usr/src/{{ php_name }};{{ item }}
   with_items:
-    - ./configure --enable-mbstring --enable-zend-multibyte --with-mysql --enable-mbregex --with-gd --with-jpeg-dir=/usr/lib --with-png-dir=/usr/lib --with-freetype-dir=/usr/lib --with-zlib-dir --with-libdir=lib64 --enable-soap --with-apxs2=/etc/httpd/bin/apxs
+    - ./configure --enable-mbstring --enable-zend-multibyte --with-mysql --with-mysqli --enable-mbregex --with-gd --with-jpeg-dir=/usr/lib --with-png-dir=/usr/lib --with-freetype-dir=/usr/lib --with-zlib-dir --with-libdir=lib64 --enable-soap --with-apxs2=/etc/httpd/bin/apxs
     - make
     - make install
 
@@ -25,6 +25,6 @@
   file: src=/usr/src/{{ php_name }}/sapi/cli/php dest=/usr/local/bin/php
 
 - name: scp php.ini ---> /etc/php.ini
-  template: src=php.ini dest=/etc/
+  template: src=php.ini dest=/usr/local/lib/
   notify:
     - restart httpd

@@ -2,9 +2,11 @@
 
 src_dir: '/usr/local/src'
 
-php_version: '5.3.6'
+php_major_version: '5'
+php_minor_version: '3.9'
+php_version: "{{ php_major_version }}.{{ php_minor_version }}"
 php_name: "php-{{ php_version }}"
-php_dl_url: "http://museum.php.net/php5/{{ php_name }}.tar.gz"
+php_dl_url: "http://museum.php.net/php{{ php_major_version }}/{{ php_name }}.tar.gz"
 # http://php.net/releases/
 
 yum_package:
