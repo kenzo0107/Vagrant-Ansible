@@ -2,6 +2,8 @@ yum_pacakage:
   - gcc
   - gcc-c++ 
   - python-devel
+  - libevent
+  - libevent-devel
   - libxslt-devel
   - libffi-devel
   - expat-devel
