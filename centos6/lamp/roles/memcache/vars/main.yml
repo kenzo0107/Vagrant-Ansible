@@ -1,0 +1,11 @@
+---
+
+src_dir: '/usr/local/src'
+
+memcached_version: '1.4.24'
+memcached_name: "memcached-{{ memcached_version }}"
+memcached_dl_url: "http://memcached.org/files/{{ memcached_name }}.tar.gz"
+
+memcache_version: '2.2.7'
+memcache_name: "memcache-{{ memcache_version }}"
+memcache_dl_url: "http://pecl.php.net/get/{{ memcache_name }}.tgz"
