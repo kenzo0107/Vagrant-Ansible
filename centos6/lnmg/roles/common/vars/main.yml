@@ -12,6 +12,7 @@ yum_pacakage:
   - bash-completion
   - psmisc
   - lsof
+  - python-pip
 # - kernel-devel
 
 pip_pacakage:
