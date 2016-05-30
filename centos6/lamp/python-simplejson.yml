@@ -1,0 +1,7 @@
+- hosts: all
+  sudo: True
+  gather_facts: no
+
+  tasks:
+    - name: install python-simplejson
+      raw: yum install -y python-simplejson
