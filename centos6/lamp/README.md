@@ -33,7 +33,13 @@ $ vagrant up
 $ vagrant ssh-config > ssh.config
 ```
 
-#### 4. ping
+#### 4. Install Python-SimpleJson on VagrantVM
+
+```
+$ ansible-playbook -i hosts python-simplejson.yml
+```
+
+#### 5. ping
 
 ```
 $ ansible default -m ping
@@ -44,19 +50,19 @@ default | success >> {
 }
 ```
 
-#### 5. Build httpd, MySQL, PHP
+#### 6. Build httpd, MySQL, PHP
 
 ```
 $ ansible-playbook lamp.yml
 ```
 
-#### 6. confirm Apache working.
+#### 7. confirm Apache working.
 
 access to <http://192.168.33.10>,
 
 display `Working!`
 
-#### 7. php -> MySQL connect confirm.
+#### 8. php -> MySQL connect confirm.
 
 access to <http://192.168.33.10/dbtest.php>,
 
