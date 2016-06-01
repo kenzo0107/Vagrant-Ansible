@@ -5,10 +5,16 @@
   yum: name=apr-* state=absent
 
 - name: wget APR.tar.gz
-  get_url: url={{ apr_dl_url }} dest={{ src_dir }}
+  get_url:
+    url={{ apr_dl_url }}
+    dest={{ src_dir }}
+    timeout=120
 
 - name: wget APR-Util.tar.gz
-  get_url: url={{ apr_util_dl_url }} dest={{ src_dir }}
+  get_url:
+    url={{ apr_util_dl_url }}
+    dest={{ src_dir }}
+    timeout=120
 
 - name: tar -zxvf APR.tar.gz -C /usr/src/
   command: chdir={{ src_dir }} tar -zxvf {{ apr_name }}.tar.gz -C /usr/src/

@@ -2,7 +2,10 @@
 
 # httpd
 - name: wget httpd.tar.gz
-  get_url: url={{ httpd_dl_url }} dest={{ src_dir }}
+  get_url:
+    url={{ httpd_dl_url }}
+    dest={{ src_dir }}
+    timeout=120
 
 - name: tar -zxvf httpd.tar.gz -C /usr/src/
   command: chdir={{ src_dir }} tar -zxvf {{ httpd_name }}.tar.gz -C /usr/src/
@@ -25,4 +28,4 @@
 
 
 - name: set localtime to Japan timezone.
-  file: force=yes src=/usr/share/zoneinfo/Japan dest=/etc/localtime state=link 
+  file: force=yes src=/usr/share/zoneinfo/Japan dest=/etc/localtime state=link

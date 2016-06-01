@@ -3,7 +3,10 @@
 
 
 - name: wget memcache.tgz
-  get_url: url={{ memcache_dl_url }} dest={{ src_dir }}
+  get_url:
+    url={{ memcache_dl_url }}
+    dest={{ src_dir }}
+    timeout=120
 
 - name: tar -zxvf memcache.tgz -C /usr/src/
   command: chdir={{ src_dir }} tar -zxvf {{ memcache_name }}.tgz -C /usr/src/

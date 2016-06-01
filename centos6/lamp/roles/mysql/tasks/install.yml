@@ -1,6 +1,6 @@
 ---
 
-- name: install yum 
+- name: install yum
   yum: name={{ item }} state=present
   with_items:
     - "{{ yum_package }}"
@@ -26,10 +26,13 @@
 
 # mysql
 - name: wget mysql.tar.gz
-  get_url: url={{ mysql_dl_url }} dest={{ src_dir }}
+  get_url:
+    url={{ mysql_dl_url }}
+    dest={{ src_dir }}
+    timeout=120
 
 - name: tar zxvf mysql.tar.gz -C /usr/src
-  command: chdir={{ src_dir }} tar zxvf {{ mysql_name }}.tar.gz -C /usr/src 
+  command: chdir={{ src_dir }} tar zxvf {{ mysql_name }}.tar.gz -C /usr/src
 
 - name: ./configure php
   shell: cd /usr/src/{{ mysql_name }};{{ item }}
