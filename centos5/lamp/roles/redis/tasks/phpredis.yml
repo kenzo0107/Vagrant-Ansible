@@ -1,0 +1,30 @@
+---
+
+- name: git clone https://...phpredis.git
+  git: repo=https://github.com/nicolasff/phpredis.git dest={{ src_dir }}/phpredis
+
+- name: make install redis
+  shell: cd {{ src_dir }}/phpredis;{{ item }}
+  with_items:
+    - /usr/local/bin/phpize
+    - ./configure --with-php-config=/usr/local/bin/php-config
+    - make
+    - make install
+
+- name: edit php.ini setting
+  lineinfile:
+    state: present
+    backrefs: yes
+    dest: /usr/local/lib/php.ini
+    regexp: '^\;\[redis\]$'
+    line: '[redis]'
+
+- name: edit php.ini setting
+  lineinfile:
+    state: present
+    backrefs: yes
+    dest: /usr/local/lib/php.ini
+    regexp: '^\;extension=redis.so$'
+    line: 'extension=redis.so'
+  notify:
+    - restart httpd

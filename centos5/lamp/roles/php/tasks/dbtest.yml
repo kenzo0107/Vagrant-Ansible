@@ -1,0 +1,4 @@
+---
+
+- name: copy dbtest.php => remote server
+  template: src=dbtest.php dest=/var/www/html/

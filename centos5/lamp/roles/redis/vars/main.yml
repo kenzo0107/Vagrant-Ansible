@@ -1,0 +1,7 @@
+---
+
+src_dir: '/usr/local/src'
+
+redis_version: '3.0.2'
+redis_name: "redis-{{ redis_version }}"
+redis_dl_url: "http://download.redis.io/releases/{{ redis_name }}.tar.gz"

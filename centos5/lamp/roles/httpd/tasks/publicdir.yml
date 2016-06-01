@@ -1,0 +1,7 @@
+---
+
+# create public directory
+- name: mkdir /var/www/html
+  file: dest=/var/www/html state=directory
+- name: mkdir /var/log/httpd
+  file: dest=/var/log/httpd state=directory

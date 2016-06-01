@@ -1,0 +1,13 @@
+---
+
+- shell: LC_ALL=C
+- shell: export LC_ALL
+- shell: yum update -y
+
+- name: install EPEL
+  yum: name=epel-release state=present
+
+- name: install yum packages
+  yum: name={{ item }} state=latest
+  with_items:
+  - "{{ yum_pacakage }}"

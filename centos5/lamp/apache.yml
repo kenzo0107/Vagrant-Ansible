@@ -1,0 +1,8 @@
+- hosts: all
+  port: 2222
+  user: vagrant
+  sudo: yes
+  gather_facts: yes
+  roles:
+    - common
+    - httpd

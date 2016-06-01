@@ -1,0 +1,62 @@
+---
+
+- name: Check Python2.7
+  command: /usr/local/bin/python2.7 -V
+  ignore_errors: True
+  register: check_python_result
+
+- name: Create tmp directory
+  file: path=/var/tmp/Python-2.7.10 state=directory
+
+- name: Download Python
+  get_url: 
+    url=https://www.python.org/ftp/python/2.7.10/Python-2.7.10.tgz
+    dest=/var/tmp/Python-2.7.10.tgz
+    validate_certs=no
+
+- name: Unarchive Python
+  unarchive:
+    src=/var/tmp/Python-2.7.10.tgz
+    dest=/var/tmp/
+    copy=no
+
+- name: ./configure Python
+  shell: cd /var/tmp/Python-2.7.10;{{ item }}
+  with_items:
+    - ./configure CFLAGS=-fPIC --enable-shared --prefix=/usr/local/
+    - make && make altinstall
+  when: check_python_result | failed
+
+- name: Link Python lib
+  file:
+    src=/usr/local/lib/libpython2.7.so.1.0
+    dest=/lib64/libpython2.7.so.1.0
+    state=link
+
+- name: Check to see if pip is already installed.
+  command: "pip --version"
+  ignore_errors: true
+  changed_when: false
+  always_run: true
+  register: pip_is_installed
+
+- name: Download get-pip.py 
+  get_url:
+    url=https://bootstrap.pypa.io/get-pip.py
+    dest=/var/tmp/get-pip.py
+    validate_certs=no
+  when: pip_is_installed.rc != 0
+
+- name: Delete get-pip.py
+  file: state=absent path=/var/tmp/get-pip/py
+  when: pip_is_installed.rc != 0
+
+- name: Install pip via Python2.7
+  command: /usr/local/bin/python2.7 /var/tmp/get-pip.py
+  become: yes
+  when: pip_is_installed.rc != 0
+
+- name: install pip packages
+  shell: source /root/.bashrc && pip install {{item}}
+  with_items:
+  - "{{ pip_pacakage }}"

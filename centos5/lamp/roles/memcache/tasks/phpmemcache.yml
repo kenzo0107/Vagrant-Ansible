@@ -1,0 +1,38 @@
+---
+
+
+
+- name: wget memcache.tgz
+  get_url: url={{ memcache_dl_url }} dest={{ src_dir }}
+
+- name: tar -zxvf memcache.tgz -C /usr/src/
+  command: chdir={{ src_dir }} tar -zxvf {{ memcache_name }}.tgz -C /usr/src/
+
+- name: make install memcache
+  shell: cd /usr/src/{{ memcache_name }};{{ item }}
+  with_items:
+    - /usr/local/bin/phpize
+    - ./configure --enable-memcache --with-php-config=/usr/local/bin/php-config
+    - make
+
+- name: cp memcache.so /path/to/php/modules/
+  command: cp /usr/src/{{ memcache_name }}/modules/memcache.so /usr/lib64/php/modules/
+
+
+- name: edit php.ini setting
+  lineinfile:
+    state: present
+    backrefs: yes
+    dest: /usr/local/lib/php.ini
+    regexp: '^\;\[memcache\]$'
+    line: '[memcache]'
+
+- name: edit php.ini setting
+  lineinfile:
+    state: present
+    backrefs: yes
+    dest: /usr/local/lib/php.ini
+    regexp: '^\;extension=memcache.so$'
+    line: 'extension=/usr/lib64/php/modules/memcache.so'
+  notify:
+    - restart httpd
