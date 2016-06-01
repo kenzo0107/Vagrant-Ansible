@@ -1,6 +1,8 @@
-# build LAMP in Vagrant by Ansible.
+# build LAMP in Vagrant by Ansible < 1.9.
 
 compile httpd, MySQL, PHP Source to build httpd, MySQL, PHP module.
+
+#### Sample playbook:
 
 - CentOS 5
 - httpd 2.2.3
