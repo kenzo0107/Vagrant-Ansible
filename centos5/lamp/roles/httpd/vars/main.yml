@@ -1,0 +1,17 @@
+---
+
+src_dir: '/usr/local/src'
+
+# httpd
+httpd_rpm_url: "ftp://rpmfind.net/linux/centos/5.11/os/x86_64/CentOS/httpd-2.2.3-91.el5.centos.x86_64.rpm"
+
+yum_pacakage:
+  - pcre-devel
+  - zlib-devel
+  - httpd-devel
+
+
+# openssl
+# openssl_version: '0.9.8e'
+# openssl_name: "openssl-{{ openssl_version }}"
+# openssl_dl_url: "http://www.openssl.org/source/{{ openssl_name }}.tar.gz"

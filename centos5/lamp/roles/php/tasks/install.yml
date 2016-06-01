@@ -1,0 +1,22 @@
+---
+
+- name: yum remove php-*
+  yum: name=php-* state=absent
+
+- name: yum remove php
+  yum: name=php state=absent
+
+- name: yum install php53-*
+  yum: name={{ item }} state=present
+  with_items:
+    - php53-devel
+    - php53-gd
+    - php53-mbstring
+    - php53-mysql
+    - php53-pdo
+    - php53-xml
+
+- name: scp php.ini ---> /etc/php.ini. restart httpd.
+  template: src=php.ini dest=/etc/
+  notify:
+    - restart httpd

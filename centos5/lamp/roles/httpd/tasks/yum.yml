@@ -1,0 +1,6 @@
+---
+
+- name: yum install modules
+  yum: name={{ item }} state=present
+  with_items:
+  - "{{ yum_pacakage }}"

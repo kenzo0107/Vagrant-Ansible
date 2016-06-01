@@ -1,0 +1,23 @@
+---
+
+- name: wget memcached.tar.gz
+  get_url: url={{ memcached_dl_url }} dest={{ src_dir }}
+
+- name: tar -zxvf memcached.tar.gz -C /usr/src/
+  command: chdir={{ src_dir }} tar -zxvf {{ memcached_name }}.tar.gz -C /usr/src/
+
+- name: make install memcached
+  shell: cd /usr/src/{{ memcached_name }};{{ item }}
+  with_items:
+    - ./configure
+    - make
+    - make install
+
+- name: create pid dir
+  file: dest=/var/run/memcached owner=root group=root state=directory
+
+- name: create build script.
+  template: src=memcached mode=0755 dest=/etc/init.d/
+
+- name: service memcached start. chkconfig memcached on.
+  service: name=memcached state=running enabled=on

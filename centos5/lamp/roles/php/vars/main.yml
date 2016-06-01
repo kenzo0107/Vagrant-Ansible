@@ -1,0 +1,26 @@
+---
+
+src_dir: '/usr/local/src'
+
+php_major_version: '5'
+php_minor_version: '3.9'
+php_version: "{{ php_major_version }}.{{ php_minor_version }}"
+php_name: "php-{{ php_version }}"
+php_dl_url: "http://museum.php.net/php{{ php_major_version }}/{{ php_name }}.tar.gz"
+# http://php.net/releases/
+
+yum_package:
+  - libxml2-devel
+  - libjpeg-devel
+  - libpng-devel
+  - freetype-demos
+  - freetype-devel
+  # - mysql-devel
+  - postgresql-devel
+  - gd-devel
+  - php-mbstring
+  - php-mysql
+  - php-mysqli
+  - php-pear
+  - php-pear-MDB2.noarch
+  - php-pear-MDB2-Driver-mysql.noarch

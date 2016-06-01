@@ -1,0 +1,10 @@
+---
+
+- name: add /sbin:/usr/sbin:/usr/local/bin to  PATH
+  lineinfile:
+    dest=/root/.bashrc
+    state=present
+    line="export PATH=$PATH:{{ ansible_env.PATH }}:/sbin:/usr/sbin:/usr/local/bin"
+
+- name: set localtime to Japan timezone.
+  file: force=yes src=/usr/share/zoneinfo/Japan dest=/etc/localtime state=link

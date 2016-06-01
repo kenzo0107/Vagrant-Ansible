@@ -1,0 +1,8 @@
+---
+
+# httpd
+- name: install the httpd rpm from a remote repo
+  yum: name={{ httpd_rpm_url }} state=present
+
+- name: scp templates/logrotate.init id@host:/etc/logrotate.d/
+  template: src=logrotate.init dest=/etc/logrotate.d/httpd mode=0644

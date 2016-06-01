@@ -1,0 +1,48 @@
+---
+
+src_dir: '/usr/local/src'
+
+mysql_rpm_url: "https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm"
+yum_epel_rpm_url: "http://mirror.webtatic.com/yum/el5/latest.rpm"
+
+mysql_root_password: "root"
+
+yum_package:
+  - mysql55w
+  - mysql55w-server
+  - cmake
+  - ncurses-devel
+
+
+pip_package:
+  - MySQL-python
+
+
+mysql_module:
+  - mysql
+  - mysql_client_test
+  - mysql_config
+  - mysql_convert_table_format
+  - mysql_find_rows
+  - mysql_fix_extensions
+  - mysql_plugin
+  - mysql_secure_installation
+  - mysql_setpermission
+  - mysql_tzinfo_to_sql
+  - mysql_upgrade
+  - mysql_waitpid
+  - mysql_zap
+  - mysqlaccess
+  - mysqladmin
+  - mysqlbinlog
+  - mysqlbug
+  - mysqlcheck
+  - mysqld_multi
+  - mysqld_safe
+  - mysqldump
+  - mysqldumpslow
+  - mysqlhotcopy
+  - mysqlimport
+  - mysqlshow
+  - mysqlslap
+  - mysqltest

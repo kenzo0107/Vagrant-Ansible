@@ -1,0 +1,25 @@
+yum_pacakage:
+  - gcc
+  - gcc-c++ 
+  - python-devel
+  - python-setuptools
+  - libevent
+  - libevent-devel
+  - libxslt-devel
+  - libffi-devel
+  - expat-devel
+  - openssl-devel
+  - openssl
+  - wget
+  - epel-release
+  - vim-enhanced
+  - bash-completion
+  - psmisc
+  - lsof
+# - kernel-devel
+
+pip_pacakage:
+  - cryptography
+  - celery
+  # - virtualenv
+  # - mysql-python
