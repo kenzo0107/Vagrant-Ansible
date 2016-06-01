@@ -3,13 +3,14 @@
 src_dir: '/usr/local/src'
 
 # openssl
-openssl_version: '1.0.1g'
+openssl_version: '1.0.2h'
 openssl_name: "openssl-{{ openssl_version }}"
-openssl_dl_url: "http://www.openssl.org/source/{{ openssl_name }}.tar.gz"
+openssl_dl_url: "ftp://ftp.openssl.org/source/{{ openssl_name }}.tar.gz"
+#openssl_dl_url: "http://www.openssl.org/source/{{ openssl_name }}.tar.gz"
 
 
 # httpd
-httpd_version: '2.4.12'
+httpd_version: '2.4.20'
 httpd_name: "httpd-{{ httpd_version }}"
 httpd_dl_url: "http://ftp.jaist.ac.jp/pub/apache/httpd/{{ httpd_name }}.tar.gz"
 apache_name: "apache-{{ httpd_version }}"
