@@ -36,7 +36,7 @@ $ vagrant ssh-config > ssh.config
 #### 4. Install Python-SimpleJson on VagrantVM
 
 ```
-$ ansible-playbook -i hosts python-simplejson.yml
+$ ansible-playbook python-simplejson.yml
 ```
 
 #### 5. ping
