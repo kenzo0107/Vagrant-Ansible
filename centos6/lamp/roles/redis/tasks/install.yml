@@ -1,7 +1,10 @@
 ---
 
 - name: wget redis.tar.gz
-  get_url: url={{ redis_dl_url }} dest={{ src_dir }}
+  get_url:
+    url={{ redis_dl_url }}
+    dest={{ src_dir }}
+    timeout=120
 
 - name: tar -zxvf redis.tar.gz -C /usr/src/
   command: chdir={{ src_dir }} tar -zxvf {{ redis_name }}.tar.gz -C /usr/src/

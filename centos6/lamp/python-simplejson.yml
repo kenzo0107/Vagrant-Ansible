@@ -1,5 +1,5 @@
 - hosts: all
-  sudo: True
+  become: yes
   gather_facts: no
 
   tasks:

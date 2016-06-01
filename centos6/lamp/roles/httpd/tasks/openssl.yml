@@ -2,7 +2,12 @@
 
 # openssl
 - name: wget the OpenSSL
-  get_url: url={{ openssl_dl_url }} dest={{ src_dir }}
+  command: wget {{ openssl_dl_url }} --directory-prefix={{ src_dir }} --timeout=120
+  # get_url:
+    # url={{ openssl_dl_url }}
+    # dest={{ src_dir }}/{{ openssl_name }}.tar.gz
+    # timeout=120
+    # validate_certs=no
 
 - name: tar zxvf OpenSSL.tar.gz -C /usr/src/
   command: chdir={{ src_dir }} tar -zxvf {{ openssl_name }}.tar.gz -C /usr/src/
@@ -31,4 +36,3 @@
 
 - name: ln -s /usr/local/openssl/bin/openssl /usr/bin/
   file: src=/usr/local/openssl/bin/openssl dest=/usr/bin/openssl owner=root group=root mode=0755 state=link
-
