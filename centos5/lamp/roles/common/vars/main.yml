@@ -1,8 +1,9 @@
 yum_pacakage:
   - gcc
-  - gcc-c++ 
+  - gcc-c++
   - python-devel
   - python-setuptools
+  - python-ssl
   - libevent
   - libevent-devel
   - libxslt-devel
@@ -18,8 +19,12 @@ yum_pacakage:
   - lsof
 # - kernel-devel
 
+epel_rpm: "http://ftp.iij.ad.jp/pub/linux/fedora/epel/5/x86_64/epel-release-5-4.noarch.rpm"
+
+python_download_dir: "/usr/local/src"
+
 pip_pacakage:
-  - cryptography
-  - celery
+  # - cryptography
+  # - celery
   # - virtualenv
   # - mysql-python

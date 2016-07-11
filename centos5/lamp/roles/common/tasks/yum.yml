@@ -2,10 +2,15 @@
 
 - shell: LC_ALL=C
 - shell: export LC_ALL
-- shell: yum update -y
 
-- name: install EPEL
+- name: yum update -y
+  yum: name=* state=present
+
+- name: install epel-release
   yum: name=epel-release state=present
+
+- name: install http://.../epel-release-5-4.noarch.rpm
+  yum: name={{ epel_rpm }} state=present
 
 - name: install yum packages
   yum: name={{ item }} state=latest
