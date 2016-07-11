@@ -1,10 +1,9 @@
 ---
 
 - name: install rpm
-  command: rpm -Uvh {{ yum_epel_rpm_url }}
-  ignore_errors: True
+  yum: name={{ yum_epel_rpm_url }} state=present disable_gpg_check=yes
 
-- name: install yum
+- name: install yum modules
   yum: name={{ item }} state=present
   with_items:
     - "{{ yum_package }}"

@@ -1,6 +1,6 @@
 - hosts: default
   user: vagrant
-  sudo: yes
+  become: yes
   gather_facts: yes
   roles:
     - common
